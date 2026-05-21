@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
   });
 
   const results = await Promise.allSettled(
-    locations.map((location) => processLocation(location))
+    locations.map((location: typeof locations[number]) => processLocation(location))
   );
 
   const succeeded = results.filter((r) => r.status === "fulfilled").length;
