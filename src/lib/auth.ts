@@ -11,12 +11,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
       authorization: {
         params: {
-          scope: [
-            "openid",
-            "email",
-            "profile",
-            "https://www.googleapis.com/auth/business.manage",
-          ].join(" "),
+          scope: "openid email profile",
           access_type: "offline",
           prompt: "consent",
         },
