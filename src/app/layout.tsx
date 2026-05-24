@@ -9,13 +9,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ReviewPilot — AI Review Responses for Salons & Med Spas",
+  title: "ReviewPilot — AI-Powered Google Review Responses",
   description:
-    "Automatically respond to every Google review with AI. Built for salons and med spas. $49/month per location.",
+    "Automatically respond to every Google review with AI. Approved by you, posted automatically. $49/month per location.",
   openGraph: {
     title: "ReviewPilot",
-    description: "AI-powered Google review responses for salons & med spas.",
+    description: "AI-powered Google review responses — approved by you, posted automatically.",
     type: "website",
+  },
+  other: {
+    google: "notranslate",
   },
 };
 

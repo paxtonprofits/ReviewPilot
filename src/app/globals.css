@@ -1,82 +1,294 @@
 @import "tailwindcss";
 
-/* Clinical Luxury design system — Stripe palette (marketing) + Cal (dashboard) */
+/* Clinical Luxury — ReviewPilot design system */
 :root {
-  /* Brand */
-  --color-navy: #0d253d;
-  --color-indigo: #533afd;
-  --color-indigo-light: #ede9ff;
-
-  /* Neutrals */
-  --color-surface: #f8f9fb;
-  --color-border: #e8eaed;
-
-  /* Typography scale */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-2xl: 1.5rem;
-
-  /* Spacing rhythm */
-  --space-page: 2rem;
-  --space-section: 1.5rem;
-
-  /* Motion */
-  --duration-fast: 100ms;
-  --duration-normal: 200ms;
+  --color-navy: #0a1f35;
+  --color-indigo: #5046e5;
+  --color-indigo-light: #eef2ff;
+  --color-surface: #f7f8fa;
+  --color-border: #e5e7eb;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ─── Keyframes ─────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulseBadge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0); }
+}
+
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+}
+
+@keyframes bounceDot {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.4); }
+}
+
+@keyframes arrowSlide {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes iconPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25) rotate(-8deg); }
+  70%  { transform: scale(0.95) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(80, 70, 229, 0); }
+  50%       { box-shadow: 0 0 16px 4px rgba(80, 70, 229, 0.18); }
+}
+
+@keyframes borderSlide {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.06); }
+  66%       { transform: translate(-20px, 25px) scale(0.94); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-25px, -20px) scale(1.04); }
+  70%       { transform: translate(20px, 30px) scale(0.96); }
+}
+
+@keyframes numberPop {
+  from { opacity: 0; transform: scale(0.7) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-4px) rotate(-6deg); }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: perspective(800px) rotateX(8deg) translateY(16px); }
+  to   { opacity: 1; transform: perspective(800px) rotateX(0deg) translateY(0); }
+}
+
+/* ─── Tailwind v4 theme ──────────────────────────── */
+@theme {
+  --animate-fade-up:     fadeUp     0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in:     fadeIn     0.4s  cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in:    scaleIn    0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-left:  slideLeft  0.5s  cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-right: slideRight 0.5s  cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-down:  slideDown  0.4s  cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-modal-in:    modalIn    0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-float:       float      3s    ease-in-out infinite;
+  --animate-shimmer:     shimmer    2s    linear infinite;
+  --animate-float-orb:  floatOrb   8s    ease-in-out infinite;
+  --animate-float-orb2: floatOrb2  11s   ease-in-out infinite;
+  --animate-number-pop: numberPop  0.5s  cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-card-reveal: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-icon-float:  iconFloat  2.5s ease-in-out infinite;
+}
+
+/* ─── Base ───────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-surface);
   color: var(--color-navy);
-  font-family:
-    "Inter",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  font-size: var(--text-base);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
-/* Smooth scrolling for in-page anchors */
-html:focus-within {
-  scroll-behavior: smooth;
-}
-
-/* Focus ring — indigo, not browser default */
 :focus-visible {
   outline: 2px solid var(--color-indigo);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Scrollbar — subtle on dashboard */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ─── Reusable animation helpers ─────────────────── */
+
+/* Card that lifts + glows on hover */
+.card-hover {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 220ms ease;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -4px rgba(0,0,0,0.12), 0 4px 8px -2px rgba(0,0,0,0.06);
+  border-color: #e0e3ff;
 }
-::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 9999px;
+
+/* Pending badge pulse */
+.badge-pending {
+  animation: pulseBadge 2s ease-in-out infinite;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+
+/* Active badge pulse */
+.badge-active {
+  animation: pulseGreen 2.5s ease-in-out infinite;
 }
+
+/* Button glow press */
+.btn-primary {
+  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), transparent);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(80, 70, 229, 0.4), 0 1px 3px rgba(80, 70, 229, 0.2);
+}
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.btn-secondary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Arrow that slides on hover (use with group) */
+.arrow-slide {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.group:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+/* Icon pop on hover (use with group) */
+.icon-pop {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.group:hover .icon-pop {
+  transform: scale(1.2) rotate(-8deg);
+}
+
+/* Sidebar nav indicator */
+.nav-indicator {
+  transform-origin: top;
+  animation: borderSlide 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Shimmer button effect — uses background-image so it overlays without overriding background-color */
+.btn-shimmer {
+  background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  background-size: 200% auto;
+  background-repeat: no-repeat;
+}
+.btn-shimmer:hover {
+  animation: shimmer 1.2s linear infinite;
+}
+
+/* Dashboard ambient dot grid */
+.dashboard-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(80, 70, 229, 0.05) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* Stat card number */
+.stat-number {
+  animation: numberPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Gradient border glow on cards */
+.card-glow-border {
+  position: relative;
+}
+.card-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(80,70,229,0.3), rgba(99,102,241,0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.card-glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ─── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }

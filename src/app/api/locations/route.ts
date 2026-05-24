@@ -27,6 +27,31 @@ export async function GET() {
   return NextResponse.json(locations);
 }
 
+export async function DELETE(req: NextRequest) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const locationId = searchParams.get("id");
+  if (!locationId) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+
+  const location = await db.businessLocation.findFirst({
+    where: { id: locationId, userId: session.user.id },
+  });
+
+  if (!location) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  await db.businessLocation.delete({ where: { id: locationId } });
+
+  return NextResponse.json({ success: true });
+}
+
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session?.user?.id) {

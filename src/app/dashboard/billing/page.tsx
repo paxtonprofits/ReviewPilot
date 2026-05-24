@@ -21,7 +21,7 @@ export default async function BillingPage() {
     <div className="p-8 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-[#0d253d] mb-2">Billing</h1>
       <p className="text-slate-500 text-sm mb-8">
-        $49/month per location · 14-day free trial · Cancel anytime
+        $49/month per location · 7-day free trial · Cancel anytime
       </p>
 
       <div className="space-y-4">
